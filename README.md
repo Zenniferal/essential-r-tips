@@ -1,7 +1,11 @@
 # Essential R tips
 Some common R commands that I believe will be useful for anyone new to the language. This includes the basics required to process and clean a dataset, then transforming that dataset and creating some basic visualisations.
 
-### Cleaning data
+## Table of Contents
+1. [Cleaning Data](#cleaningdata)
+2. [Transforming Data](#transformingdata)
+
+### Cleaning Data <a name="cleaningdata"></a>
 
 The functions in this tutorial require installing the tidyverse package and library.
 We also require R's built in palmer penguins dataset.
@@ -92,7 +96,7 @@ penguins %>%
   filter(species == "Adelie")
 ```
 
-### Transforming data
+### Transforming Data <a name="transformingdata"></a>
 
 To separate one column into multiple columns we can use the separate() function. As an example we will separate the stage column into stage_only and maturity. We use sep="," to indicate that the comma is the position in the string where the separation will occur.
 Then we can use the trimws() function to remove leading whitespace from the records in the maturity column.
