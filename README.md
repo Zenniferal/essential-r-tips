@@ -4,6 +4,7 @@ Some common R commands that I believe will be useful for anyone new to the langu
 ## Table of Contents
 1. [Cleaning Data](#cleaningdata)
 2. [Transforming Data](#transformingdata)
+3. [Visualisation](#visualisation)
 
 ### Cleaning Data <a name="cleaningdata"></a>
 
@@ -113,4 +114,26 @@ penguins_raw <- penguins_raw %>%  unite("stage", stage_only, maturity, sep=", ")
 We can use the mutate() function which will both create a new column and allow us to use data from existing columns to populate the new column. In this example we will create a column called culmen_length_cm. The data of this column is the culmen_length_mm column divided by 10 to convert it to centimetres.
 ```
 penguins_raw <- penguins_raw %>%  mutate(culmen_length_cm = culmen_length_mm/10)
+```
+
+### Visualisation <a name="visualisation"></a>
+
+To create a scatter plot in R we can use the geom_point function with the ggplot package. Below we will create a scatter plot that maps the body mass on the x-axis and the flipper length on the y-axis.
+
+```
+ggplot(data=penguins_raw) + geom_point(mapping=aes(x=body_mass_g, y=flipper_length_mm))
+```
+
+You might notice that there is a clear correlation between body mass and flipper length. However we don't know much else about this correlation. Let's say we want to know which species is represented by which point on the scatter plot. To do so we can add the species to the color aesthetic.
+
+```
+ggplot(data=penguins_raw) + geom_point(mapping=aes(x=body_mass_g, y=flipper_length_mm, color=species))
+```
+
+Now we know which species is represented by each point by looking at their colors and the associated legend. We can also have each species showing on their own chart by using the facet_wrap() function.
+
+```
+ggplot(data=penguins_raw) + 
+  geom_point(mapping=aes(x=body_mass_g, y=flipper_length_mm, color=species)) + 
+  facet_wrap(~species)
 ```
